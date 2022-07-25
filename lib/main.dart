@@ -13,8 +13,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Personal Expenses',
       theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.amber,
           fontFamily: 'QuickSand',
           textTheme: ThemeData.light().textTheme.copyWith(
               headline6: TextStyle(
@@ -41,7 +39,9 @@ class MyApp extends StatelessWidget {
                   ),
                 )
                 .headline6,
-          )),
+          ),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
+              .copyWith(secondary: Colors.amber)),
       home: MyHomePage(),
     );
   }
@@ -75,11 +75,12 @@ class _MyHomePageState extends State<MyHomePage> {
         .toList();
   }
 
-  void _addNewTransaction(String txTitle, double txAmount) {
+  void _addNewTransaction(
+      String txTitle, double txAmount, DateTime chosenDate) {
     final newTx = Transaction(
       title: txTitle,
       amount: txAmount,
-      date: DateTime.now(),
+      date: chosenDate,
       id: DateTime.now().toString(),
     );
 
