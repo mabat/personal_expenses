@@ -41,7 +41,8 @@ class MyApp extends StatelessWidget {
                 .headline6,
           ),
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(secondary: Colors.amber)),
+              .copyWith(secondary: Colors.amber)
+              .copyWith(error: Colors.red)),
       home: MyHomePage(),
     );
   }
@@ -89,6 +90,13 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void _deleteTransaction(String id) {
+    if (id == null) return;
+    setState(() {
+      _userTransactions.removeWhere((element) => element.id == id);
+    });
+  }
+
   void _startAddNewTransaction(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
@@ -122,6 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
             Chart(_recentTransactions),
             TransationList(
               transactions: _userTransactions,
+              deleteTx: _deleteTransaction,
             )
           ],
         ),
