@@ -51,7 +51,7 @@ class _NewTransactionState extends State<NewTransaction> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                 labelText: "Title",
               ),
@@ -60,7 +60,7 @@ class _NewTransactionState extends State<NewTransaction> {
               //   titleInput = value;
               // },
             ),
-            TextField(
+            TextFormField(
               decoration: InputDecoration(
                 labelText: "Amount",
               ),
@@ -68,7 +68,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 decimal: true,
               ),
               controller: _amountController,
-              onSubmitted: (_) =>
+              onFieldSubmitted: (_) =>
                   _submitData(), // '_' is by convention and means "i don't need it"
               // onChanged: (value) {
               //   amountInput = value;
