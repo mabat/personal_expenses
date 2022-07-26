@@ -44,64 +44,73 @@ class _NewTransactionState extends State<NewTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: "Title",
+    final mediaQuery = MediaQuery.of(context);
+
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 5,
+        child: Container(
+          padding: EdgeInsets.only(
+            top: 10,
+            left: 10,
+            right: 10,
+            bottom: mediaQuery.viewInsets.bottom + 10,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Title",
+                ),
+                controller: _titleController,
+                // onChanged: (value) {
+                //   titleInput = value;
+                // },
               ),
-              controller: _titleController,
-              // onChanged: (value) {
-              //   titleInput = value;
-              // },
-            ),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: "Amount",
+              TextFormField(
+                decoration: InputDecoration(
+                  labelText: "Amount",
+                ),
+                keyboardType: TextInputType.numberWithOptions(
+                  decimal: true,
+                ),
+                controller: _amountController,
+                onFieldSubmitted: (_) =>
+                    _submitData(), // '_' is by convention and means "i don't need it"
+                // onChanged: (value) {
+                //   amountInput = value;
+                // },
               ),
-              keyboardType: TextInputType.numberWithOptions(
-                decimal: true,
-              ),
-              controller: _amountController,
-              onFieldSubmitted: (_) =>
-                  _submitData(), // '_' is by convention and means "i don't need it"
-              // onChanged: (value) {
-              //   amountInput = value;
-              // },
-            ),
-            Container(
-              height: 70,
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    child: Text(_selectedDate == null
-                        ? "No Date Choosen!"
-                        : "Picked Date: ${DateFormat.yMd().format(_selectedDate)}"),
-                  ),
-                  TextButton(
-                    onPressed: _presentDatePicker,
-                    child: Text(
-                      "Choose Date",
-                      style: TextStyle(
-                          color: Theme.of(context).primaryColor,
-                          fontWeight: FontWeight.bold),
+              Container(
+                height: 70,
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(_selectedDate == null
+                          ? "No Date Choosen!"
+                          : "Picked Date: ${DateFormat.yMd().format(_selectedDate)}"),
                     ),
-                  )
-                ],
+                    TextButton(
+                      onPressed: _presentDatePicker,
+                      child: Text(
+                        "Choose Date",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            TextButton(
-                onPressed: _submitData,
-                child: Text(
-                  "Add transaction",
-                  style: TextStyle(color: Colors.purple),
-                ))
-          ],
+              TextButton(
+                  onPressed: _submitData,
+                  child: Text(
+                    "Add transaction",
+                    style: TextStyle(color: Colors.purple),
+                  ))
+            ],
+          ),
         ),
       ),
     );
