@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 import 'package:flutter_complete_guide/widgets/chart.dart';
@@ -194,10 +195,12 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () => _startAddNewTransaction(context),
-      ),
+      floatingActionButton: Platform.isIOS
+          ? Container()
+          : FloatingActionButton(
+              child: Icon(Icons.add),
+              onPressed: () => _startAddNewTransaction(context),
+            ),
     );
   }
 }
